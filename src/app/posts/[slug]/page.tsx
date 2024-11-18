@@ -1,40 +1,35 @@
 import Link from "next/link";
 import FusionCollection from "fusionable/FusionCollection";
-import { FusionFieldsType, FusionItemType } from "fusionable/FusionItem";
+import { FusionFieldsType } from "fusionable/FusionItem";
 import Showdown from "showdown";
 import styles from "./PostPage.module.css";
 import fs from "fs";
 import path from "path";
 import { formatDate } from "@/utils";
 
-export async function getStaticPaths() {
+export function generateStaticParams() {
   const files = fs.readdirSync(path.join("content/posts")); // 'content' folder holds Markdown files
-  const paths = files.map((filename) => ({
-    params: { slug: filename.replace(".md", "") },
+  return files.map((filename) => ({
+    slug: filename.replace(".md", ""),
   }));
-
-  return { paths, fallback: false }; // All paths are pre-rendered
 }
 
-export const getStaticProps = async ({
-  params,
-}: {
-  params: { slug: string };
-}) => {
-  if (!params?.slug) {
-    return;
-  }
+type Params = Promise<{ slug: string }>;
 
-  const collection = new FusionCollection().loadFromDir("content/posts");
-  const post = collection.getOneBySlug(params.slug);
+// Main PostPage component
+export default async function PostPage(props: { params: Params }) {
+  const { slug } = await props.params;
+  const posts = new FusionCollection().loadFromDir("content/posts");
+  const item = posts.getOneBySlug(slug);
+
+  if (!item) {
+    throw new Error("Post not found");
+  }
+  const post = item.getItem();
+
   if (!post) {
     throw new Error("Post not found");
   }
-  return { props: { post: post.getItem() } };
-};
-
-// Main PostPage component
-export default function PostPage({ post }: { post: FusionItemType }) {
   const fields: FusionFieldsType = post.fields;
   const converter = new Showdown.Converter();
   const contentHTML = converter.makeHtml(post.content);

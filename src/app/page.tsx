@@ -3,13 +3,6 @@ import FusionCollection from "fusionable/FusionCollection";
 import styles from "./HomePage.module.css";
 import { formatDate } from "../utils";
 
-export const getStaticProps = async () => {
-  const collection = new FusionCollection()
-    .loadFromDir("content/posts")
-    .orderBy("date", "desc");
-  return { props: { posts: collection.getItemsArray() } };
-};
-
 type Post = {
   fields: {
     title: string;
@@ -29,7 +22,12 @@ const PostItem = ({ post }: { post: Post }) => (
 );
 
 // Main HomePage component
-export default function HomePage({ posts }: { posts: Post[] }) {
+export default function HomePage() {
+  const posts = new FusionCollection()
+    .loadFromDir("content/posts")
+    .orderBy("date", "desc")
+    .getItemsArray();
+
   return (
     <main className={styles.homePage}>
       <header className={styles.pageHeader}>
