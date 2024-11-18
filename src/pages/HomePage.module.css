@@ -1,0 +1,58 @@
+/* HomePage.module.css */
+.homePage {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.pageTitle {
+  font-size: 2em;
+  color: #333;
+}
+
+.postsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.postsList {
+  list-style: none;
+  padding: 0;
+}
+
+.postItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.postItem:hover {
+  background-color: #f9f9f9;
+}
+
+.postTitle {
+  font-size: 1.5em;
+  margin: 0;
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.postTitle:hover {
+  text-decoration: underline;
+}
+
+.postDate {
+  margin-top: 4px;
+  font-size: 0.9em;
+  color: #666;
+}

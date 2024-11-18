@@ -1,0 +1,44 @@
+/* PostPage.module.css */
+.postPage {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 1em;
+  color: #0070f3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.backLink:hover {
+  color: #0056b3;
+}
+
+.postHeader {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+}
+
+.postTitle {
+  font-size: 2.5em;
+  color: #333;
+  margin: 0;
+}
+
+.postDate {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.postContent {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #444;
+}
